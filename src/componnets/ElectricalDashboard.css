@@ -45,359 +45,528 @@
     color: transparent;
     letter-spacing: 0.5px;
   }
-  
-  /* Container for all metric cards */
-  .metrics-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    gap: 25px;
-  }
-  
-  /* Individual Metric Card */
-  .metric-card {
-    background: white;
-    border-radius: 12px;
-    padding: 25px;
-    min-width: 200px;
-    flex: 1;
-    min-height: 260px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04),
-                0 2px 5px rgba(0, 0, 0, 0.02);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .metric-card::after {
-    content: "";
-    position: absolute;
-    height: 4px;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    transform: scaleX(0.92);
-    border-radius: 4px;
-    opacity: 0.9;
-    transition: transform 0.3s ease;
-  }
-  
-  .metric-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06),
-                0 4px 8px rgba(0, 0, 0, 0.04);
-  }
-  
-  .metric-card:hover::after {
-    transform: scaleX(1);
-  }
-  
-  .metric-card:nth-child(1)::after {
-    background: linear-gradient(to right, #3498db, #2980b9);
-  }
-  
-  .metric-card:nth-child(2)::after {
-    background: linear-gradient(to right, #2ecc71, #27ae60);
-  }
-  
-  .metric-card:nth-child(3)::after {
-    background: linear-gradient(to right, #f1c40f, #f39c12);
-  }
-  
-  /* Metric Title Styling */
-  .metric-title {
-    font-size: 17px;
-    color: #7f8c8d;
-    margin-bottom: 12px;
-    font-weight: 500;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
-  
-  /* Metric Value Styling */
-  .metric-value {
-    font-size: 32px;
-    font-weight: 700;
-    color: #2c3e50;
-    margin: 12px 0 4px;
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
-  }
-  
-  /* Metric Unit Styling */
-  .metric-unit {
-    font-size: 14px;
-    color: #95a5a6;
-    font-weight: 500;
-  }
-  
-  /* Gauge Container */
-  .gauge {
-    width: 160px;
-    height: 80px;
-    position: relative;
-    overflow: hidden;
-    margin: 15px 0;
-  }
-  
-  /* Gauge Background */
-  .gauge-background {
-    position: absolute;
-    width: 160px;
-    height: 160px;
-    border-radius: 80px 80px 0 0;
-    background: #ecf0f1;
-    top: 80px;
-    overflow: hidden;
-  }
-  
-  /* Gauge Ticks */
-  .gauge::before {
-    content: "";
-    position: absolute;
-    width: 160px;
-    height: 160px;
-    top: 80px;
-    left: 0;
-    background-size: 160px 160px;
-    background-image: repeating-conic-gradient(
-      from 0deg,
-      transparent 0deg 10deg,
-      rgba(0, 0, 0, 0.03) 10deg 11deg,
-      transparent 11deg 20deg
-    );
-    border-radius: 80px 80px 0 0;
-    z-index: 1;
-  }
-  
-  /* Gauge Fill Base Styling */
-  .gauge-fill {
-    position: absolute;
-    width: 160px;
-    height: 160px;
-    border-radius: 80px 80px 0 0;
-    top: 80px;
-    transform-origin: center bottom;
-    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-    z-index: 2;
-  }
-  
-  /* Current Gauge Specific Styling */
-  .current-gauge {
-    background: linear-gradient(to right, #3498db, #2980b9);
-    box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
-  }
-  
-  /* Voltage Gauge Specific Styling */
-  .voltage-gauge {
-    background: linear-gradient(to right, #2ecc71, #27ae60);
-    box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
-  }
-  
-  /* Gauge Cover (inner circle) */
-  .gauge-cover {
-    position: absolute;
-    width: 140px;
-    height: 70px;
-    border-radius: 70px 70px 0 0;
-    background: white;
-    top: 90px;
-    left: 10px;
-    z-index: 3;
-    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
-  }
-  
-  /* Gauge Center Point */
-  .gauge-center {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    background: #34495e;
-    border-radius: 50%;
-    bottom: 0;
-    left: 75px;
-    z-index: 4;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Battery Container */
-  .battery-container {
-    width: 140px;
-    height: 70px;
-    position: relative;
-    margin: 15px 0;
-  }
-  
-  /* Battery Body */
-  .battery-body {
-    width: 110px;
-    height: 55px;
-    border: 3px solid #34495e;
+
+  .realtime-clock {
+    background-color: #ffffff;
+    padding: 10px 15px;
     border-radius: 6px;
-    position: absolute;
-    left: 10px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    margin: 0 auto;
+    max-width: 200px;
   }
   
-  /* Battery Tip (+) */
-  .battery-tip {
-    width: 8px;
-    height: 25px;
-    background: #34495e;
-    position: absolute;
-    right: 10px;
-    top: 15px;
-    border-radius: 0 3px 3px 0;
-    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  .clock-time {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #2c3e50;
   }
   
-  /* Battery Fill Level */
-  .battery-fill {
-    height: 55px;
-    width: 81%;
-    margin-top: 3px;
-    margin-left: 11px;
-    border-radius: 3px;
-    transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
-    box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.4);
-    background-image: linear-gradient(
-      to bottom,
-      rgba(255, 255, 255, 0.2) 0%,
-      rgba(255, 255, 255, 0) 50%,
-      rgba(0, 0, 0, 0.05) 100%
-    );
-  }
-  
-  /* Data Source Indicator */
-  .data-source {
-    font-size: 12px;
-    color: #3498db;
-    font-style: italic;
-    margin-top: 8px;
-    position: relative;
-    padding-left: 18px;
-  }
-  
-  .data-source::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 12px;
-    height: 12px;
-    background-color: #3498db;
-    border-radius: 50%;
-    animation: pulse-blue 2s infinite;
-  }
-  
-  @keyframes pulse-blue {
-    0% { opacity: 0.4; transform: translateY(-50%) scale(0.8); }
-    50% { opacity: 1; transform: translateY(-50%) scale(1.1); }
-    100% { opacity: 0.4; transform: translateY(-50%) scale(0.8); }
-  }
-  
-  /* Calculation Note */
-  .calculation-note {
-    font-size: 12px;
-    color: #95a5a6;
-    font-style: italic;
-    margin-top: -8px;
-    margin-bottom: 8px;
-  }
-  
-  /* Last Updated Timestamp */
-  .last-updated {
+  .clock-date {
+    font-size: 0.9rem;
     color: #7f8c8d;
-    font-size: 13px;
-    text-align: center;
-    margin-top: -10px;
-    margin-bottom: 15px;
-    background: rgba(236, 240, 241, 0.5);
-    padding: 6px 12px;
-    border-radius: 20px;
-    display: inline-block;
-  }
-  
-  /* Loading Indicator */
-  .loading-indicator {
-    color: #3498db;
-    font-size: 14px;
-    text-align: center;
-    margin-top: -10px;
-    margin-bottom: 15px;
-    animation: pulse 1.5s infinite;
-    background: rgba(52, 152, 219, 0.1);
-    padding: 8px 15px;
-    border-radius: 20px;
-    display: inline-block;
-  }
-  
-  @keyframes pulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
-  }
-  
-  /* Error Message */
-  .error-message {
-    color: #e74c3c;
-    font-size: 14px;
-    text-align: center;
-    margin-top: -10px;
-    margin-bottom: 15px;
-    padding: 8px 15px;
-    background-color: rgba(231, 76, 60, 0.1);
-    border-radius: 20px;
-    display: inline-block;
-  }
-  
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    .metrics-container {
-      flex-direction: column;
-      align-items: center;
-    }
-    
-    .metric-card {
-      width: 90%;
-      max-width: 320px;
-      margin-bottom: 20px;
-    }
-    
-    .dashboard {
-      padding: 15px;
-    }
-  }
-  
-  @media (max-width: 480px) {
-    .dashboard {
-      padding: 12px;
-      border-radius: 8px;
-    }
-    
-    .header h1 {
-      font-size: 22px;
-    }
-    
-    .metric-value {
-      font-size: 26px;
-    }
-    
-    .metric-card {
-      padding: 15px;
-      min-height: 230px;
-    }
-    
-    .gauge, .battery-container {
-      transform: scale(0.9);
-      margin: 8px 0;
-    }
+    margin-top: 2px;
   }
 
-  /* width: 81%;
-    margin-left: 8%;
-    height: 81%;
-    background-color: rgb(68, 204, 68); */
+.solar-tracking-section {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04),
+              0 2px 5px rgba(0, 0, 0, 0.02);
+  margin-bottom: 25px;
+  position: relative;
+  overflow: hidden;
+}
+
+.solar-tracking-section::after {
+  content: "";
+  position: absolute;
+  height: 4px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: scaleX(0.92);
+  border-radius: 4px;
+  opacity: 0.9;
+  transition: transform 0.3s ease;
+  background: linear-gradient(to right, #f1c40f, #f39c12);
+}
+
+.solar-tracking-section:hover::after {
+  transform: scaleX(1);
+}
+
+.solar-tracking-section h2 {
+  color: #2c3e50;
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.sun-position-container {
+  position: relative;
+  padding: 20px 0;
+}
+
+.sun-path {
+  position: relative;
+  height: 60px;
+  background: linear-gradient(to bottom, #87ceeb 0%, #f0f8ff 100%);
+  border-radius: 100px;
+  overflow: hidden;
+  margin-bottom: 10px;
+  box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.horizon-line {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #34495e;
+}
+
+.sun-indicator {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle, #f1c40f 0%, #f39c12 100%);
+  border-radius: 50%;
+  box-shadow: 0 0 15px rgba(243, 156, 18, 0.8);
+  z-index: 2;
+}
+
+.sunrise-marker, .sunset-marker {
+  position: absolute;
+  bottom: 0;
+}
+
+.sunrise-marker {
+  left: 5%;
+}
+
+.sunset-marker {
+  right: 5%;
+}
+
+.marker {
+  width: 2px;
+  height: 10px;
+  background-color: #34495e;
+}
+
+.time {
+  font-size: 0.8rem;
+  color: #34495e;
+  margin-top: 5px;
+}
+
+.day-status {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin-top: 10px;
+}
+
+/* Container for all metric cards */
+.metrics-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 25px;
+}
+
+.metric-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  text-align: center;
+  transition: transform 0.2s;
+}
+
+.metric-card:hover {
+  transform: translateY(-5px);
+}
+
+.metric-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.metric-icon {
+  color: #3498db;
+}
+
+/* Gauge Container */
+.gauge {
+  width: 160px;
+  height: 80px;
+  position: relative;
+  overflow: hidden;
+  margin: 15px 0;
+}
+
+/* Gauge Background */
+.gauge-background {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border-radius: 80px 80px 0 0;
+  background: #ecf0f1;
+  top: 80px;
+  overflow: hidden;
+}
+
+/* Gauge Ticks */
+.gauge::before {
+  content: "";
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  top: 80px;
+  left: 0;
+  background-size: 160px 160px;
+  background-image: repeating-conic-gradient(
+    from 0deg,
+    transparent 0deg 10deg,
+    rgba(0, 0, 0, 0.03) 10deg 11deg,
+    transparent 11deg 20deg
+  );
+  border-radius: 80px 80px 0 0;
+  z-index: 1;
+}
+
+/* Gauge Fill Base Styling */
+.gauge-fill {
+  position: absolute;
+  width: 160px;
+  height: 160px;
+  border-radius: 80px 80px 0 0;
+  top: 80px;
+  transform-origin: center bottom;
+  transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+
+/* Current Gauge Specific Styling */
+.current-gauge {
+  background: linear-gradient(to right, #3498db, #2980b9);
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+}
+
+/* Voltage Gauge Specific Styling */
+.voltage-gauge {
+  background: linear-gradient(to right, #2ecc71, #27ae60);
+  box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+}
+
+/* Gauge Cover (inner circle) */
+.gauge-cover {
+  position: absolute;
+  width: 140px;
+  height: 70px;
+  border-radius: 70px 70px 0 0;
+  background: white;
+  top: 90px;
+  left: 10px;
+  z-index: 3;
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Gauge Center Point */
+.gauge-center {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #34495e;
+  border-radius: 50%;
+  bottom: 0;
+  left: 75px;
+  z-index: 4;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.metric-value {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2c3e50;
+}
+
+.metric-unit {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+/* Battery Container */
+.battery-container {
+  width: 140px;
+  height: 70px;
+  position: relative;
+  margin: 15px 0;
+}
+
+/* Battery Body */
+.battery-body {
+  width: 110px;
+  height: 55px;
+  border: 3px solid #34495e;
+  border-radius: 6px;
+  position: absolute;
+  left: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Battery Tip (+) */
+.battery-tip {
+  width: 8px;
+  height: 25px;
+  background: #34495e;
+  position: absolute;
+  right: 10px;
+  top: 15px;
+  border-radius: 0 3px 3px 0;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Battery Fill Level */
+.battery-fill {
+  height: 49px;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0) 50%,
+    rgba(0, 0, 0, 0.05) 100%
+  );
+  transition: width 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: inset 0 0 15px rgba(255, 255, 255, 0.4);
+  border-radius: 3px;
+  margin-top: 3px;
+  margin-left: 3px;
+}
+
+.power-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+}
+
+.power-value {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #f39c12;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
+}
+
+.power-unit {
+  font-size: 1rem;
+  color: #95a5a6;
+  font-weight: 500;
+}
+
+/* Data Source Indicator */
+.data-source {
+  font-size: 12px;
+  color: #3498db;
+  font-style: italic;
+  margin-top: 8px;
+  position: relative;
+  padding-left: 18px;
+}
+
+.data-source::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  background-color: #3498db;
+  border-radius: 50%;
+  animation: pulse-blue 2s infinite;
+}
+
+@keyframes pulse-blue {
+  0% { opacity: 0.4; transform: translateY(-50%) scale(0.8); }
+  50% { opacity: 1; transform: translateY(-50%) scale(1.1); }
+  100% { opacity: 0.4; transform: translateY(-50%) scale(0.8); }
+}
+
+/* Calculation Note */
+.calculation-note {
+  font-size: 12px;
+  color: #95a5a6;
+  font-style: italic;
+  margin-top: -8px;
+  margin-bottom: 8px;
+}
+
+/* Last Updated Timestamp */
+.last-updated {
+  color: #7f8c8d;
+  font-size: 13px;
+  text-align: center;
+  margin-top: -10px;
+  margin-bottom: 15px;
+  background: rgba(236, 240, 241, 0.5);
+  padding: 6px 12px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+/* Loading Indicator */
+.loading-indicator {
+  color: #3498db;
+  font-size: 14px;
+  text-align: center;
+  margin-top: -10px;
+  margin-bottom: 15px;
+  animation: pulse 1.5s infinite;
+  background: rgba(52, 152, 219, 0.1);
+  padding: 8px 15px;
+  border-radius: 20px;
+  display: inline-block;
+}
+
+@keyframes pulse {
+  0% { opacity: 0.6; }
+  50% { opacity: 1; }
+  100% { opacity: 0.6; }
+}
+
+/* Error Message */
+.error-message {
+  color: #e74c3c;
+  font-size: 14px;
+  text-align: center;
+  margin-top: -10px;
+  margin-bottom: 15px;
+  padding: 8px 15px;
+  background-color: rgba(231, 76, 60, 0.1);
+  border-radius: 20px;
+  display: inline-block;
+}
+
+.graphs-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
+}
+
+.graph-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04),
+              0 2px 5px rgba(0, 0, 0, 0.02);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.graph-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06),
+              0 4px 8px rgba(0, 0, 0, 0.04);
+}
+
+.graph-card::after {
+  content: "";
+  position: absolute;
+  height: 4px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: scaleX(0.92);
+  border-radius: 4px;
+  opacity: 0.9;
+  transition: transform 0.3s ease;
+}
+
+.graph-card:hover::after {
+  transform: scaleX(1);
+}
+
+.graph-card:nth-child(1)::after {
+  background: linear-gradient(to right, #8e44ad, #9b59b6);
+}
+
+.graph-card:nth-child(2)::after {
+  background: linear-gradient(to right, #16a085, #1abc9c);
+}
+
+.graph-card:nth-child(3)::after {
+  background: linear-gradient(to right, #d35400, #e67e22);
+}
+
+.graph-card h3 {
+  color: #2c3e50;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 18px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .metrics-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .metric-card {
+    width: 90%;
+    max-width: 320px;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard {
+    padding: 15px;
+  }
+
+  .graphs-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .dashboard {
+    padding: 12px;
+    border-radius: 8px;
+  }
+  
+  .header h1 {
+    font-size: 22px;
+  }
+  
+  .metric-value {
+    font-size: 26px;
+  }
+  
+  .metric-card {
+    padding: 15px;
+    min-height: 230px;
+  }
+  
+  .gauge, .battery-container {
+    transform: scale(0.9);
+    margin: 8px 0;
+  }
+}
