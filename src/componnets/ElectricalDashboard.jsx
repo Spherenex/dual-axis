@@ -370,12 +370,12 @@ const ElectricalDashboard = () => {
             <div 
               className="battery-fill"
               style={{
-                width: batteryWidth,
+                width: 85,
                 backgroundColor: batteryColor
               }}
             ></div>
           </div>
-          <div className="metric-value">100</div>
+          <div className="metric-value">85</div>
           <div className="metric-unit">Percent</div>
           <div className="data-source">Live Feed</div>
         </div>
