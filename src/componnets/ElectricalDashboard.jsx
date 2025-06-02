@@ -160,8 +160,10 @@ const ElectricalDashboard = () => {
       
       if (snapshot.exists()) {
         const data = snapshot.val();
-        const newCurrent = data.Current !== undefined ? data.Current : current;
-        const newVoltage = data.Voltage !== undefined ? data.Voltage : voltage;
+        // Limit the current to 1A maximum
+        const newCurrent = data.Current !== undefined ? Math.min(data.Current, 1) : current;
+        // Limit the voltage to 12V maximum
+        const newVoltage = data.Voltage !== undefined ? Math.min(data.Voltage, 12) : voltage;
         
         setCurrent(newCurrent);
         setVoltage(newVoltage);
@@ -212,10 +214,13 @@ const ElectricalDashboard = () => {
 
   const batteryPercentage = calculateBatteryPercentage(voltage);
 
-  const currentRotation = (current / 0.5) * 180; // 0-0.5 Amps maps to 0-180 degrees
-  const voltageRotation = (voltage / 1) * 180; // 0-1 Volts maps to 0-180 degrees
+  // Adjust rotation calculations to use the capped values
+  // For current: 0-1 Amps maps to 0-180 degrees
+  const currentRotation = (Math.min(current, 1) / 1) * 180;
+  // For voltage: 0-12 Volts maps to 0-180 degrees
+  const voltageRotation = (Math.min(voltage, 12) / 12) * 180;
   
-  // Calculate power (watts)
+  // Calculate power (watts) using the actual values (even if display is capped)
   const power = current * voltage;
 
   const getBatteryColor = (percentage) => {
@@ -259,6 +264,11 @@ const ElectricalDashboard = () => {
   // Format sunrise/sunset times
   const formattedSunrise = formatTime(new Date(sunrise));
   const formattedSunset = formatTime(new Date(sunset));
+
+  // Function to get display values with caps
+  const getDisplayValue = (value, max) => {
+    return Math.min(value, max).toFixed(2);
+  };
 
   return (
     <div className="dashboard">
@@ -318,7 +328,7 @@ const ElectricalDashboard = () => {
             <div className="gauge-cover"></div>
             <div className="gauge-center"></div>
           </div>
-          <div className="metric-value">{current.toFixed(2)}</div>
+          <div className="metric-value">{getDisplayValue(current, 1)}</div>
           <div className="metric-unit">Amps</div>
           <div className="data-source">Live Feed</div>
         </div>
@@ -335,7 +345,7 @@ const ElectricalDashboard = () => {
             <div className="gauge-cover"></div>
             <div className="gauge-center"></div>
           </div>
-          <div className="metric-value">{voltage.toFixed(2)}</div>
+          <div className="metric-value">{getDisplayValue(voltage, 12)}</div>
           <div className="metric-unit">Volts</div>
           <div className="data-source">Live Feed</div>
         </div>
